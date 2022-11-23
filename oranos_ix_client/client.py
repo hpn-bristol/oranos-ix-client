@@ -7,12 +7,13 @@ socketio_exceptions = (ConnectionError, ConnectionRefusedError, SocketIOError, T
 
 
 class IxClient(object):
-    def __init__(self, url: str, username: str, password: str):
+    def __init__(self, url: str, username: str, password: str, data_logging: bool = False):
         self._url = url
         self._username = username
         self._password = password
         self._client = Client(reconnection_delay=0)
         self._is_connected = False
+        self._data_logging = data_logging
 
         @self._client.event
         def connect():
@@ -39,16 +40,20 @@ class IxClient(object):
         return wrapper
 
     @socketio_wrapper
-    def connect(self, relation_id: str):
-        self._client.connect(
-            url=self._url,
-            socketio_path="/internal/ws",
-            auth={"ix_username": self._username, "ix_password": self._password, "relation_id": relation_id},
-        )
+    def connect(self, relation_id: str = ""):
+        auth = {"ix_username": self._username, "ix_password": self._password}
+        if relation_id:
+            auth["relation_id"] = relation_id
+        self._client.connect(url=self._url, socketio_path="/internal/ws", auth=auth)
 
     @socketio_wrapper
     def send(self, data: dict):
         if not self._is_connected:
-            print("Please make a client connection before sendind data.")
+            print("Please make a client connection before sending any data.")
             return
+        if not dict:
+            print("Data cannot be empty. Please send a valid dict.")
+            return
+        if self._data_logging:
+            print(f"Sending {data}")
         self._client.emit("ix_emit", data)
