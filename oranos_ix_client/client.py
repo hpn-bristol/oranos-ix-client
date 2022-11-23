@@ -13,15 +13,15 @@ class IxClient(object):
         self._password = password
         self._client = Client(reconnection_delay=0)
 
-        @self._client.on("connect")
+        @self._client.event
         def connect():
             print("Connected to Ix!")
 
-        @self._client.on("disconnect")
+        @self._client.event
         def disconnect():
             print("Connected from Ix.")
 
-        @self._client.on("connect_error")
+        @self._client.event
         def connect_error(message):
             print("Connection error:", message)
 
@@ -32,6 +32,8 @@ class IxClient(object):
                 return func(*args, **kwargs)
             except socketio_exceptions as ex:
                 print(ex)
+        
+        return wrapper
 
     @socketio_wrapper
     def connect(self, relation_id: str):
