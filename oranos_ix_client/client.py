@@ -13,15 +13,15 @@ class IxClient(object):
         self._password = password
         self._client = Client(reconnection_delay=0)
 
-        @self._client.event
+        @self._client.on("connect")
         def connect():
             print("Connected to Ix!")
 
-        @self._client.event
+        @self._client.on("disconnect")
         def disconnect():
             print("Connected from Ix.")
 
-        @self._client.event
+        @self._client.on("connect_error")
         def connect_error(message):
             print("Connection error:", message)
 
