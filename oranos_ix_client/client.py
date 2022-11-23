@@ -13,6 +13,7 @@ class IxClient(object):
         self._password = password
         self._client = Client(reconnection_delay=0)
         self._is_connected = False
+        self._emit_path = "xapp_local_emit"
         self._data_logging = data_logging
 
         @self._client.event
@@ -42,8 +43,10 @@ class IxClient(object):
     @socketio_wrapper
     def connect(self, relation_id: str = ""):
         auth = {"ix_username": self._username, "ix_password": self._password}
+        self._emit_path = "xapp_local_emit"
         if relation_id:
             auth["relation_id"] = relation_id
+            self._emit_path = "xapp_relation_emit"
         self._client.connect(url=self._url, socketio_path="/internal/ws", auth=auth)
 
     @socketio_wrapper
@@ -56,4 +59,4 @@ class IxClient(object):
             return
         if self._data_logging:
             print(f"Sending {data}")
-        self._client.emit("ix_emit", data)
+        self._client.emit(self._emit_path, data)
