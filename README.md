@@ -2,6 +2,14 @@
 
 Python library that enables data transmission from xApps to the [ORANOS Ix server](https://github.com/hpn-bristol/oranos-ix-interface).
 
+## Installation
+
+This is a private library, thus not published on PyPi. You can still use `pip` to install it, but you have to provide the repo's url.
+
+```bash
+pip install git+ssh://git@github.com/hpn-bristol/oranos-ix-client.git
+```
+
 ## IxClient
 
 This class implements an ORANOS Ix client that enables xApp communication to their respective Ix server. It uses socket.io websockets and long-polling requests to achieve minimal transmit latency.
