@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='oranos-ix-client',
+    name='oranos_ix_client',
     version='0.2.0',
     author='Savvas Mantzouranidis',
     author_email='s.mantzouranidis@bristol.ac.uk',
@@ -16,6 +16,6 @@ setuptools.setup(
         "Bug Tracker": "https://github.com/hpn-bristol/oranos-ix-client/issues"
     },
     license='MIT',
-    packages=['oranos-ix-client'],
+    packages=['oranos_ix_client'],
     install_requires=['websocket-client', 'python-socketio[client]'],
 )
