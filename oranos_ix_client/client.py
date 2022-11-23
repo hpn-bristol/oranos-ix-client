@@ -12,14 +12,17 @@ class IxClient(object):
         self._username = username
         self._password = password
         self._client = Client(reconnection_delay=0)
+        self._is_connected = False
 
         @self._client.event
         def connect():
             print("Connected to Ix!")
+            self._is_connected = True
 
         @self._client.event
         def disconnect():
-            print("Connected from Ix.")
+            print("Disconnected from Ix.")
+            self._is_connected = False
 
         @self._client.event
         def connect_error(message):
@@ -45,4 +48,7 @@ class IxClient(object):
 
     @socketio_wrapper
     def send(self, data: dict):
+        if not self._is_connected:
+            print("Please make a client connection before sendind data.")
+            return
         self._client.emit("ix_emit", data)
