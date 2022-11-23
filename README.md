@@ -15,7 +15,6 @@ This class implements an ORANOS Ix client that enables xApp communication to the
 | password     | str  | The `ix_password` provided by the Ix server after registering the xApp.                          |
 | data_logging | bool | (Optional) If True, a copy of the trasported data will be printed in the logs. Default is False. |
 
-
 ## Functions
 
 ### is_connected()
