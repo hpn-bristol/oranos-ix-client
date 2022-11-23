@@ -10,7 +10,7 @@ class IxClient(object):
     """An ORANOS Ix Client.
 
     This class implements an ORANOS Ix client that enables xApp communication to their respective Ix server.
-    It uses socket.io websockets and long-polling requests to achieve minimal transport latency.
+    It uses socket.io websockets and long-polling requests to achieve minimal transmit latency.
 
     :param url: Root URL of the xApp's local Ix server.
     :param username: The `ix_username` provided by the Ix server after registering the xApp.
@@ -81,7 +81,7 @@ class IxClient(object):
         """Transmit data to the Ix server. If the connection was made with a relation_id, 
         the data will also be forwarded to the remote Ix and xApp found in the relation details.
 
-        :param data: Data in a form of a dictionary.
+        :param data: Data in the form of a dictionary.
 
         Example usage::
 
