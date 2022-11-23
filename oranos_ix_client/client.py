@@ -61,7 +61,7 @@ class IxClient(object):
         """Initiate the Ix client's connection to the Ix server.
 
         :param relation_id: (Optional) If a relation_id is provided, the Ix server will create a 
-        pipeline to the remote Ix and xApp found in the relation details.
+        pipeline to the remote Ix server and xApp found in the relation details.
         """
         auth = {"ix_username": self._username, "ix_password": self._password}
         self._emit_path = "xapp_local_emit"
@@ -79,7 +79,7 @@ class IxClient(object):
     @socketio_wrapper
     def send(self, data: dict):
         """Transmit data to the Ix server. If the connection was made with a relation_id, 
-        the data will also be forwarded to the remote Ix and xApp found in the relation details.
+        the data will also be forwarded to the remote Ix server and xApp found in the relation details.
 
         :param data: Data in the form of a dictionary.
 

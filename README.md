@@ -37,11 +37,13 @@ Terminate the Ix client's connection to the Ix server.
 
 ### send(data)
 
-Transmit data to the Ix server. If the connection was made with a relation_id, the data will also be forwarded to the remote Ix and xApp found in the relation details.
+Transmit data to the Ix server.
 
 | Parameter | Type | Description                       |
 | --------- | ---- | --------------------------------- |
 | data      | dict | Data in the form of a dictionary. |
+
+If the connection was made with a relation_id, the data will also be forwarded to the remote Ix server and xApp found in the relation details.
 
 ## Examples
 
