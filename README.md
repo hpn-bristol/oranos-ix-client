@@ -1,6 +1,15 @@
 # oranos-ix-client
 
-Python library that enables data transmission from xApps to the [ORANOS Ix server](https://github.com/hpn-bristol/oranos-ix-interface).
+Python library that enables data transmission from xApps to the [ORANOS Ix server](https://github.com/hpn-bristol/oranos-ix-interface) and potentially to remote RIC xApps.
+
+## Prerequisites
+
+1. **Ix server URL**
+2. **Ix credentials** are generated for each xApp when it registers to its local Ix server. In order to register, the developer can do so through `POST /internal/register`.
+
+<p align="center">
+    <img width="50%" src="https://user-images.githubusercontent.com/45666401/204852554-9a4d9c7e-33e2-4d04-ace9-a5338c36fab1.svg" alt="xApp registration to Ix interface">
+</p>
 
 ## Installation
 
@@ -74,7 +83,13 @@ while client.is_connected:
 
 ### Using xApp relations
 
-In order to make use of an xApp relation and forward data to a remote Ix server, you just need to define the optional `relation_id` parameter during the connection step.
+Firstly, in order to use an xApp relation you first need to create one. To do so, the xApp developer should request it from the Ix through `POST /internal/relations`.
+
+<p align="center">
+    <img width="100%" src="https://user-images.githubusercontent.com/45666401/204853266-937888df-aea1-4aeb-a2a0-8e8a1bfaf497.svg" alt="xApp relation creation with remote xApp">
+</p>
+
+Then, the xApp can make use of the relation and forward data to a remote Ix server. The only code change required is to define the optional `relation_id` parameter during the connection step.
 
 ```python
 client.connect(relation_id="rel521ff72fda23360e")
